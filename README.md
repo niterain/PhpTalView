@@ -1,4 +1,4 @@
-Allows you to use [PHPTAL](http://wwww.phptal.org) seamlessly in [Laravel4](http://www.laravel.com)
+Allows you to use [PHPTAL](http://www.phptal.org) seamlessly in [Laravel4](http://www.laravel.com)
 
 Installation
 ============
