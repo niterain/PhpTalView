@@ -1,0 +1,21 @@
+{
+    "name": "niterain/PhpTalView",
+    "description": "",
+    "authors": [
+        {
+            "name": "Levi Stanley",
+            "email": "levi@eneservices.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x"
+    },
+    "autoload": {
+        "psr-0": {
+            "PhpTalView\\View": "src/",
+            "PhpTalView\\Facades": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
