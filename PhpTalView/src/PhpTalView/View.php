@@ -52,7 +52,7 @@ class View extends  \Illuminate\View\View {
 
 	public function __get($key)
 	{
-		return $this->get($key);
+		return $this->phptal->get($key);
 	}
 
 	public function __set($key, $value)
