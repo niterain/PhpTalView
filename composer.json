@@ -1,0 +1,25 @@
+{
+    "name": "niterain/PhpTalView",
+    "description": "Brings PHPTAL to Laravel4",
+    "homepage": "http://github.com/niterain/PhpTalView",
+    "keywords": ["laravel", "phptal"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Levi Stanley",
+            "email": "levi@eneservices.com",
+	    "homepage": "http://www.eneservices.com",
+	    "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x"
+    },
+    "autoload": {
+        "psr-0": {
+            "PhpTalView\\View": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
