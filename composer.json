@@ -1,5 +1,5 @@
 {
-    "name": "niterain/PhpTalView",
+    "name": "niterain/php-tal-view",
     "description": "Brings PHPTAL to Laravel4",
     "homepage": "http://github.com/niterain/PhpTalView",
     "keywords": ["laravel", "phptal"],
