@@ -13,8 +13,7 @@
     },
     "autoload": {
         "psr-0": {
-            "PhpTalView\\View": "src/",
-            "PhpTalView\\Facades": "src/"
+            "PhpTalView\\View": "src/"
         }
     },
     "minimum-stability": "dev"

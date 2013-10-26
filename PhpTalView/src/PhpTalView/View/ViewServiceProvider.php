@@ -1,35 +1,72 @@
 <?php namespace PhpTalView\View;
 
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Engines\EngineResolver;
 
-class ViewServiceProvider extends ServiceProvider {
+use Illuminate\View\Environment;
+use PhpTalView\View\Engines\PhpTalEngine;
+
+class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider {
 
 	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
+	 * Setting up the config log
 	 */
-	protected $defer = false;
+	public function register() {
+		$this->package('niterain/PhpTalView','PhpTalView', __DIR__.'/../../');
+		parent::register();
+	}
 
 	/**
-	 * Register the service provider.
+	 * Register Engine Resolver
 	 *
 	 * @return void
 	 */
-	public function register()
-	{
-		$this->package('niterain/PhpTalView');
+	public function registerEngineResolver() {
+		$my = $this;
+		$app = $this->app;
 
-		$this->app['PhpTalView'] = $this->app->share(function($app)
-			{
-				return new \PhpTalView\View($this->app);
-			});
-
-		$this->app->booting(function() {
-			$loader = AliasLoader::getInstance();
-			$loader->alias('View', 'PhpTalView\Facades\View');
-		});
+		$app['view.engine.resolver'] = $app->share(
+			function ($app) use ($my) {
+				$resolver = new EngineResolver();
+				$my->{'registerPhpTalEngine'}($resolver);
+				return $resolver;
+			}
+		);
 	}
 
+	/**
+	 * Register Environment
+	 *
+	 * @return void
+	 */
+	public function registerEnvironment() {
+		$this->app['view'] = $this->app->share(function($app) {
+				$resolver = $app['view.engine.resolver'];
+				$finder = $app['view.finder'];
+
+				$finder = new \Illuminate\View\FileViewFinder($app['files'], array());
+				$finder->addLocation($app['config']->get('PhpTalView::templateRepository'));
+				$finder->addExtension($app['config']->get('PhpTalView::extension'));
+
+				$env = new Environment($resolver, $finder, $app['events']);
+				$env->addExtension($app['config']->get('PhpTalView::extension'),'phptal');
+				$env->setContainer($app);
+				$env->share('app', $app);
+				return $env;
+			});
+	}
+
+	/**
+	 * Register PhpTalEngine
+	 *
+	 * @param $resolver
+	 *
+	 * @return void
+	 */
+	public function registerPhpTalEngine($resolver) {
+		$app = $this->app;
+
+		$resolver->register('phptal', function() use ($app) {
+				return new PhpTalEngine($app);
+			});
+	}
 }
