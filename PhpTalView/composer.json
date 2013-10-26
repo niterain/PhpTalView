@@ -1,10 +1,14 @@
 {
     "name": "niterain/PhpTalView",
-    "description": "",
+    "description": "Brings PHPTAL to Laravel4",
+    "homepage": "http://github.com/niterain/PhpTalView",
+    "keywords": ["laravel", "phptal"],
     "authors": [
         {
             "name": "Levi Stanley",
-            "email": "levi@eneservices.com"
+            "email": "levi@eneservices.com",
+	    "homepage": "http://www.eneservices.com",
+	    "role": "Developer"
         }
     ],
     "require": {
