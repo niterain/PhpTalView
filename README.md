@@ -8,7 +8,7 @@ Add `niterain\PhpTalView` as a requirement to composer.json:
 ```javascript
 {
     "require": {
-        "niterain/PhpTalView": "0.1.*"
+        "niterain/php-tal-view": "dev-master"
     }
 }
 ```
