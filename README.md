@@ -43,6 +43,7 @@ PHPTAL also has a nice feature which you can use called filters, for example I h
 ```php
 'preFilters' => array(
     'bustCache',
-    'minimizeJs'
+    'minimizeJs',
+    'adderJs'
 )
 ```
