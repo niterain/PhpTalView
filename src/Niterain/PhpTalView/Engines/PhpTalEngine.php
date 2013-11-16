@@ -1,7 +1,7 @@
-<?php namespace PhpTalView\View\Engines;
+<?php namespace Niterain\PhpTalView\Engines;
 
 use Illuminate\View\Engines\EngineInterface;
-use PhpTalView\View\FilterChain;
+use PhpTalView\FilterChain;
 
 class PhpTalEngine implements EngineInterface {
 	protected $phptal;

@@ -18,7 +18,7 @@ Update your packages with `composer update` or install with `composer install`.
 Once Composer has installed or updated your packages you need to register PhpTalView with Laravel. Open up app/config/app.php and find the providers key towards the bottom and add:
 
 ```php
-'PhpTalView\View\ViewServiceProvider',
+'NiterainPhpTalView\PhpTalViewServiceProvider',
 ```
 
 Configuration
@@ -42,7 +42,7 @@ PHPTAL also has a nice feature which you can use called filters, for example I h
 
 ```php
 'preFilters' => array(
-    'bust_cache',
-    'minimize_js'
+    'bustCache',
+    'minimizeJs'
 )
 ```

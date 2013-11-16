@@ -1,4 +1,4 @@
-<?php namespace PhpTalView\View;
+<?php namespace Niterain\PhpTalView;
 
 use PHPTAL_Filter;
 
