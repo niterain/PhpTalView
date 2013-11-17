@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-0": {
-            "PhpTalView\\View": "src/"
+            "Niterain\\PhpTalView": "src/"
         }
     },
     "minimum-stability": "dev"
