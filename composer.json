@@ -8,8 +8,8 @@
         {
             "name": "Levi Stanley",
             "email": "levi@eneservices.com",
-	    "homepage": "http://www.eneservices.com",
-	    "role": "Developer"
+            "homepage": "http://www.eneservices.com",
+            "role": "Developer"
         }
     ],
     "require": {
