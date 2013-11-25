@@ -2,7 +2,7 @@
 
 use PHPTAL_Filter;
 
-class FilterChain implements PHPTAL_Filter {
+class PhpTalFilterChain implements PHPTAL_Filter {
 	protected  $filters = array();
 
 	public function add(PHPTAL_Filter $filter) {

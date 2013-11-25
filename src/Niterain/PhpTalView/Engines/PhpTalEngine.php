@@ -1,11 +1,14 @@
 <?php namespace Niterain\PhpTalView\Engines;
 
 use Illuminate\View\Engines\EngineInterface;
-use PhpTalView\FilterChain;
+use Niterain\PhpTalView\PhpTalFilterChain;
+use Niterain\PhpTalView\Translator;
 
 class PhpTalEngine implements EngineInterface {
 	protected $phptal;
 	protected $app;
+	protected $config;
+	protected $translationSettings = array();
 
 	/**
 	 * Prep the PHPTAL object
@@ -19,13 +22,32 @@ class PhpTalEngine implements EngineInterface {
 		$this->phptal = new \PHPTAL();
 
 		// Override the defaults with information from config file
-		$preFilters = $this->ifNotEmpty($this->config->get('PhpTalView::preFilters'), array());
-		$postFilters = $this->ifNotEmpty($this->config->get('PhpTalView::postFilters'), array());
-		$outputMode = $this->ifNotEmpty($this->config->get('PhpTalView::outputMode'), 'UTF-8');
-		$phpCodeDestination = $this->ifNotEmpty($this->config->get('PhpTalView::phpCodeDestination'), $app['path.storage'].'/views') ;
-		$forceReparse = $this->ifNotEmpty($this->config->get('PhpTalView::forceParse'), true);
-		$templateRepository = $this->ifNotEmpty($this->config->get('PhpTalView::templateRepository'), $app['path'].'/views');
+		$resource = 'PhpTalView::';
+		$engine = $this->config->get('view.default');
+		if (!empty($engine) && $engine == 'phptal') {
+			$resource = 'view.';
+		}
+		
+		$preFilters = $this->config->get($resource.'preFilters', array());
+		$postFilters = $this->config->get($resource.'postFilters', array());
+		$encoding = $this->config->get($resource.'encoding', 'UTF-8');
+		$outputMode = $this->config->get($resource.'outputMode', 55);
+		$phpCodeDestination = $this->config->get($resource.'phpCodeDestination', $app['path.storage'].'/views') ;
+		$forceReparse = $this->config->get($resource.'forceParse', true);
+		$templateRepository = $this->config->get($resource.'templateRepository', $app['path'].'/views');
+		$translationClass = $this->config->get($resource.'translationClass');
+		$translationLanguages = $this->config->get($resource.'translationLanguages', array('en'));
+		$translationFilename = $this->config->get($resource.'translationFilename', 'translations');
+		$translationPath = $this->config->get($resource.'translationPath', app_path().'/lang/');
 
+		// Setting up translation settings
+		$this->translationSettings['encoding'] = $encoding;
+		$this->translationSettings['path'] = $translationPath;
+		$this->translationSettings['languages'] = $translationLanguages;
+
+		if (!empty($translationClass)) {
+			$this->setTranslator($translationLanguages, $translationFilename, $translationClass);
+		}
 		// Setting up all the filters
 
 		if (!empty($preFilters)) {
@@ -35,7 +57,7 @@ class PhpTalEngine implements EngineInterface {
 		}
 
 		if (!empty($postFilters)) {
-			$filterChain = new FilterChain();
+			$filterChain = new PhpTalFilterChain();
 			foreach ($postFilters as $filter) {
 				$filterChain->add($filter);
 			}
@@ -49,15 +71,27 @@ class PhpTalEngine implements EngineInterface {
 	}
 
 	/**
-	 * Save a few keystrokes on setting defaults
+	 * Sets the translator
 	 *
-	 * @param $value
-	 * @param $default
-	 *
-	 * @return mixed
+	 * @param null $language
+	 * @param string $domain
+	 * @param string $translatorClass
 	 */
-	protected function ifNotEmpty($value, $default) {
-		return (!empty($value) ? $value : $default);
+	public function setTranslator($languages = null, $domain = 'translations', $translatorClass = '\PHPTAL_GetTextTranslator') {
+		if ($languages === null) {
+			$languages = array($this->config->get('app.locale'));
+		}
+
+		$translator = new $translatorClass;
+
+		call_user_func_array(array($translator, 'setLanguage'), $languages);
+		echo "ENCODING: ".$this->translationSettings['encoding']."<br/>";
+		//$translator->setEncoding($this->translationSettings['encoding']);
+		echo "H:: $domain<br/>";
+		$translator->addDomain($domain, $this->translationSettings['path']);
+		//$translator->useDomain($domain);
+
+		$this->phptal->setTranslator($translator);
 	}
 
 	/**
