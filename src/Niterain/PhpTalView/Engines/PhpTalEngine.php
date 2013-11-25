@@ -85,11 +85,8 @@ class PhpTalEngine implements EngineInterface {
 		$translator = new $translatorClass;
 
 		call_user_func_array(array($translator, 'setLanguage'), $languages);
-		echo "ENCODING: ".$this->translationSettings['encoding']."<br/>";
-		//$translator->setEncoding($this->translationSettings['encoding']);
-		echo "H:: $domain<br/>";
+		$translator->setEncoding($this->translationSettings['encoding']);
 		$translator->addDomain($domain, $this->translationSettings['path']);
-		//$translator->useDomain($domain);
 
 		$this->phptal->setTranslator($translator);
 	}
