@@ -13,12 +13,13 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0",
+	"laravel/framework": "~4.2.11"
     },
     "autoload": {
         "psr-0": {
             "Niterain\\PhpTalView": "src/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
