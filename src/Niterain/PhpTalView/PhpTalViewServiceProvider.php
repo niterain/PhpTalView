@@ -34,7 +34,7 @@ class PhpTalViewServiceProvider extends ViewServiceProvider
 		}
 		define('TEMPLATE_ID', $templateIdString);
 
-		$this->package('niterain/PhpTalView', 'PhpTalView', __DIR__.'/../../');
+		//$this->package('niterain/PhpTalView', 'PhpTalView', __DIR__.'/../../');
 		parent::register();
 	}
 
