@@ -5,6 +5,7 @@
     "keywords": ["laravel", "phptal"],
     "license": "MIT",
     "type": "package",
+    "minimum-stability": "stable",
     "authors": [
         {
             "name": "Levi Stanley",
@@ -30,6 +31,5 @@
     	"psr-0": {
 	    "Nirvana\\PhpTalView": "tests/"
 	}
-    },
-    "minimum-stability": "stable"
+    }
 }
