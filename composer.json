@@ -4,6 +4,7 @@
     "homepage": "http://github.com/niterain/PhpTalView",
     "keywords": ["laravel", "phptal"],
     "license": "MIT",
+    "version": "2.0.1",
     "authors": [
         {
             "name": "Levi Stanley",
