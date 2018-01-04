@@ -4,7 +4,7 @@
     "homepage": "http://github.com/niterain/PhpTalView",
     "keywords": ["laravel", "phptal"],
     "license": "MIT",
-    "version": "2.0.1",
+    "type": "package",
     "authors": [
         {
             "name": "Levi Stanley",
@@ -14,8 +14,8 @@
         }
     ],
     "require": {
-        "php": "^5.3 || ^7.0",
-        "laravel/laravel": ">=5.5"
+        "php": ">5.3",
+        "laravel/laravel": ">=3.0"
     },
     "require-dev": {
 	"php": ">5.3",
@@ -25,6 +25,11 @@
         "psr-0": {
             "Niterain\\PhpTalView": "src/"
         }
+    },
+    "autoload-dev": {
+    	"psr-0": {
+	    "Nirvana\\PhpTalView": "tests/"
+	}
     },
     "minimum-stability": "stable"
 }
