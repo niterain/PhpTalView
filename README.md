@@ -5,14 +5,9 @@ Installation
 
 Add `niterain\PhpTalView` as a requirement to composer.json:
 
-```javascript
-{
-    "require": {
-        "niterain/php-tal-view": "^2.0.1"
-    }
-}
 ```
-
+composer require niterain/php-tal-view:2.0.1.x-dev
+```
 Update your packages with `composer update` or install with `composer install`.
 
 Once Composer has installed or updated your packages you need to register PhpTalView with Laravel. Open up app/config/app.php and find the providers key towards the bottom and add:
