@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": "~5.3 || ~6.0 || ~7.0",
-        "laravel/laravel": "~5.0"
+        "laravel/laravel": "5.0.0 - 5.5.*"
     },
     "require-dev": {
 	"php": "~5.3 || ~6.0 || ~7.0",
